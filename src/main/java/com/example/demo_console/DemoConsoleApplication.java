@@ -4,7 +4,6 @@ import com.example.demo_console.entity.CarBrand;
 import com.example.demo_console.entity.CarModel;
 import com.example.demo_console.repository.CarBrandRepository;
 import com.example.demo_console.repository.CarModelRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,7 +27,7 @@ public class DemoConsoleApplication implements CommandLineRunner {
     final CarModelRepository carModelRepository;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         CarBrand bmw = new CarBrand("BMW");
         CarBrand nissan = new CarBrand("Nissan");
 
@@ -44,7 +43,7 @@ public class DemoConsoleApplication implements CommandLineRunner {
 
         carBrandRepository.saveAll(brands);
 
-        System.out.println("<<<<<<" + carModelRepository.findAll());
+        System.out.println("<<<<" + carModelRepository.findAll());
 
     }
 }
