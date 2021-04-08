@@ -6,7 +6,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -93,15 +95,19 @@ public class DemoConsoleApplication implements CommandLineRunner {
     }
 
     private List<Parking> initParking(List<Car> cars) {
-        int year = 2021;
-        int month = 4;
-        int day = 8;
-        int hour = 12;
-        int minute = 10;
-        Parking parking1 = new Parking(cars.get(0), LocalDateTime.of(year, month, day, hour, minute), LocalDateTime.of(year, month, day, hour + 1, minute));
-        Parking parking2 = new Parking(cars.get(1), LocalDateTime.of(year, month, day, hour + 2, minute), LocalDateTime.of(year, month, day, hour + 5, minute));
-        Parking parking3 = new Parking(cars.get(2), LocalDateTime.of(year, month, day + 1, hour, minute), LocalDateTime.of(year, month, day + 3, hour + 1, minute));
-        Parking parkin4 = new Parking(cars.get(0), LocalDateTime.of(year, month, day + 4, hour, minute), LocalDateTime.of(year, month, day + 6, hour - 2, minute));
+        LocalDate localDate1 = LocalDate.of(2021, 4,8 );
+        LocalDate localDate2 = LocalDate.of(2021, 4,10 );
+
+        LocalTime localTime1 = LocalTime.of(12, 10);
+        LocalTime localTime2 = LocalTime.of(12, 20);
+        LocalTime localTime3 = LocalTime.of(14, 20);
+        LocalTime localTime4 = LocalTime.of(15, 30);
+
+
+        Parking parking1 = new Parking(cars.get(0), localDate1, localDate1, localTime1, localTime2);
+        Parking parking2 = new Parking(cars.get(1),localDate1, localDate2, localTime1, localTime3);
+        Parking parking3 = new Parking(cars.get(2),localDate1, localDate1, localTime2, localTime3);
+        Parking parkin4 = new Parking(cars.get(3), localDate2, localDate2, localTime3, localTime4);
         return Arrays.asList(parking1, parking2, parking3, parkin4);
     }
 }
