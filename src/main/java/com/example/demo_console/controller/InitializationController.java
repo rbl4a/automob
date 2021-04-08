@@ -10,7 +10,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.util.List;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/init")
 public class InitializationController {
     private final CarBrandService carBrandService;
     private final CarModelService carModelService;
