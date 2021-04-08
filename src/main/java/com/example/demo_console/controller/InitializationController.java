@@ -5,6 +5,7 @@ import com.example.demo_console.service.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class InitializationController {
     }
 
     @GetMapping
-    public String initializationDB() {
+    public RedirectView initializationDB() {
         List<CarBrand> carBrands = CarBrand.initBrands();
         List<Person> persons = Person.initPerson();
         List<CarModel> carModels = CarModel.initModels(carBrands);
@@ -44,6 +45,6 @@ public class InitializationController {
         carService.saveAll(cars);
         parkingService.saveAllParking(parking);
 
-        return "redirect:/parking";
+        return new RedirectView("/parking");
     }
 }
