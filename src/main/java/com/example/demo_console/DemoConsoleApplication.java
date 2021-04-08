@@ -5,6 +5,7 @@ import com.example.demo_console.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.w3c.dom.ls.LSOutput;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -62,6 +63,9 @@ public class DemoConsoleApplication implements CommandLineRunner {
 
         System.out.println("<<<<<<Поиск владельца по номеру автомобиля>>>>>>");
         System.out.println(personRepository.findAllByCars(carRepository.findCarByGovNumber("а111мр")));
+
+        System.out.println("<<<<<<Все записи парковки>>>>>>");
+        System.out.println(parkingRepository.findAll());
     }
 
     private List<CarBrand> initBrands() {
