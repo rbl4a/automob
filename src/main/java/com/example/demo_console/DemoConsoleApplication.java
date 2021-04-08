@@ -52,9 +52,11 @@ public class DemoConsoleApplication implements CommandLineRunner {
         personRepository.saveAll(persons);
         carRepository.saveAll(cars);
 
-
+        System.out.println("<<<<<<Поиск по марке авто>>>>>>");
         System.out.println(carRepository.findAllByCarModel_CarBrandBrandName("BMW"));
 
+        System.out.println("<<<<<<Поиск авто по номеру владельца>>>>>>");
+        System.out.println(carRepository.findAllByPerson_PhoneNumber("66-56"));
     }
 
     private List<CarBrand> initBrands() {
