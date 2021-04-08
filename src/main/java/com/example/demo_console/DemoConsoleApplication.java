@@ -57,6 +57,9 @@ public class DemoConsoleApplication implements CommandLineRunner {
 
         System.out.println("<<<<<<Поиск авто по номеру владельца>>>>>>");
         System.out.println(carRepository.findAllByPerson_PhoneNumber("66-56"));
+
+        System.out.println("<<<<<<Поиск владельца по номеру автомобиля>>>>>>");
+        System.out.println(personRepository.findAllByCars(carRepository.findCarByGovNumber("а111мр")));
     }
 
     private List<CarBrand> initBrands() {
