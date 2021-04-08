@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @Entity
@@ -29,9 +30,8 @@ public class Car {
         this.person = person;
     }
 
-    @OneToOne (mappedBy = "car")
-    @JoinColumn(name = "car_id")
-    private Parking parking;
+    @OneToMany (mappedBy = "car", fetch = FetchType.EAGER)
+    private List<Parking> parking;
 
     @ManyToOne
     @JoinColumn(name = "person_id")
