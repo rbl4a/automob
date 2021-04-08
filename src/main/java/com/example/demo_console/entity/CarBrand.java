@@ -1,11 +1,15 @@
 package com.example.demo_console.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Collection;
 
-@Data
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "car_brand")
 public class CarBrand {
@@ -18,13 +22,18 @@ public class CarBrand {
     @Column(name = "brand_name")
     private String brandName;
 
-    @OneToMany(mappedBy = "carBrand", cascade = CascadeType.ALL)
-    private List<CarModel> carModel;
+    @OneToMany(mappedBy = "carBrand", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Collection<CarModel> carModel;
 
-    public CarBrand() {
-    }
 
     public CarBrand(String brandName) {
         this.brandName = brandName;
+    }
+
+    @Override
+    public String toString() {
+        return "CarBrand{" +
+                "brandName='" + brandName + '\'' +
+                '}';
     }
 }

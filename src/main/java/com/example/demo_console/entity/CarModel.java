@@ -1,13 +1,16 @@
 package com.example.demo_console.entity;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @NoArgsConstructor
+@Getter
+@Setter
 @Entity
-@Data
 @Table(name = "car_model")
 public class CarModel {
 
@@ -23,8 +26,18 @@ public class CarModel {
     @JoinColumn(name = "brand_id")
     private CarBrand carBrand;
 
+    @OneToMany (mappedBy = "carModel", fetch = FetchType.EAGER)
+    private Collection<Car> carNumber;
+
     public CarModel(String modelName, CarBrand carBrand) {
         this.modelName = modelName;
         this.carBrand = carBrand;
+    }
+
+    @Override
+    public String toString() {
+        return "CarModel{" +
+                "modelName='" + modelName + '\'' +
+                '}';
     }
 }
