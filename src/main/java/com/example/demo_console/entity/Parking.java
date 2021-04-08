@@ -70,7 +70,7 @@ public class Parking {
 
     @Override
     public String toString() {
-        return "Parking{" +
+        return "\nParking{" +
                 "startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", price=" + price +

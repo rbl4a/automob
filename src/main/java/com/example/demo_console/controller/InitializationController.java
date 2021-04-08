@@ -9,6 +9,12 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
+/**
+ * Для инициализации таблиц базы данных.
+ * Используется один раз совместно с параметом spring.jpa.hibernate.ddl-auto=none
+ * в файле application.properties.
+ * После инициализации изменить параметр на none.
+ */
 @RestController
 @RequestMapping("/init")
 public class InitializationController {
