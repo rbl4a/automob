@@ -108,6 +108,8 @@ public class DemoConsoleApplication implements CommandLineRunner {
         Parking parking2 = new Parking(cars.get(1),localDate1, localDate2, localTime1, localTime3);
         Parking parking3 = new Parking(cars.get(2),localDate1, localDate1, localTime2, localTime3);
         Parking parkin4 = new Parking(cars.get(3), localDate2, localDate2, localTime3, localTime4);
-        return Arrays.asList(parking1, parking2, parking3, parkin4);
+        Parking parkin5 = new Parking(cars.get(1), localDate2, localDate2, localTime3, localTime4);
+
+        return Arrays.asList(parking1, parking2, parking3, parkin4, parkin5);
     }
 }
