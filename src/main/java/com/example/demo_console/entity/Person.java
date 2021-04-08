@@ -3,6 +3,7 @@ package com.example.demo_console.entity;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.List;
 
 @NoArgsConstructor
@@ -39,5 +40,13 @@ public class Person {
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
+    }
+
+    public static List<Person> initPerson() {
+        Person person1 = new Person("Ivan", "Ivanov", "66-56");
+        Person person2 = new Person("Petr", "Petrov", "67-72");
+        Person person3 = new Person("Ilia", "Ilyin", "78-21");
+        Person person4 = new Person("Jhon", "Travolta", "42-35");
+        return Arrays.asList(person1, person2, person3, person4);
     }
 }

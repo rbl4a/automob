@@ -5,7 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -35,5 +37,11 @@ public class CarBrand {
         return "CarBrand{" +
                 "brandName='" + brandName + '\'' +
                 '}';
+    }
+
+    public static List<CarBrand> initBrands() {
+        CarBrand bmw = new CarBrand("BMW");
+        CarBrand nissan = new CarBrand("Nissan");
+        return Arrays.asList(bmw, nissan);
     }
 }

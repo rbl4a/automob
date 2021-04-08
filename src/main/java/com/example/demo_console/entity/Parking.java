@@ -8,6 +8,8 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.List;
 
 @NoArgsConstructor
 @Entity
@@ -73,5 +75,24 @@ public class Parking {
                 ", endTime=" + endTime +
                 ", price=" + price +
                 '}';
+    }
+
+    public static List<Parking> initParking(List<Car> cars) {
+        LocalDate localDate1 = LocalDate.of(2021, 4,8 );
+        LocalDate localDate2 = LocalDate.of(2021, 4,10 );
+
+        LocalTime localTime1 = LocalTime.of(12, 10);
+        LocalTime localTime2 = LocalTime.of(12, 20);
+        LocalTime localTime3 = LocalTime.of(14, 20);
+        LocalTime localTime4 = LocalTime.of(15, 30);
+
+
+        Parking parking1 = new Parking(cars.get(0), localDate1, localDate1, localTime1, localTime2);
+        Parking parking2 = new Parking(cars.get(1),localDate1, localDate2, localTime1, localTime3);
+        Parking parking3 = new Parking(cars.get(2),localDate1, localDate1, localTime2, localTime3);
+        Parking parkin4 = new Parking(cars.get(3), localDate2, localDate2, localTime3, localTime4);
+        Parking parkin5 = new Parking(cars.get(1), localDate2, localDate2, localTime3, localTime4);
+
+        return Arrays.asList(parking1, parking2, parking3, parkin4, parkin5);
     }
 }
