@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,19 +32,18 @@ public class DemoConsoleApplication implements CommandLineRunner {
         CarBrand bmw = new CarBrand("BMW");
         CarBrand nissan = new CarBrand("Nissan");
 
-        CarModel x5 = new CarModel("X5");
-        CarModel x1 = new CarModel("X1");
-        CarModel skyline = new CarModel("Skyline");
-        CarModel patrol = new CarModel("Patrol");
+        CarModel x5 = new CarModel("X5", bmw);
+        CarModel x1 = new CarModel("X1", bmw);
+        CarModel skyline = new CarModel("Skyline", nissan);
+        CarModel patrol = new CarModel("Patrol", nissan);
 
-        bmw.setCarModel(Arrays.asList(x5, x1));
-        nissan.setCarModel(Arrays.asList(skyline, patrol));
-
+        List<CarModel> models = Arrays.asList(x5, x1, skyline, patrol);
         List<CarBrand> brands = Arrays.asList(bmw, nissan);
 
         carBrandRepository.saveAll(brands);
+        carModelRepository.saveAll(models);
 
-        System.out.println("<<<<" + carModelRepository.findAll());
+        System.out.println("All Good");
 
     }
 }
