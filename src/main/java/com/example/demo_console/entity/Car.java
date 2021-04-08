@@ -29,6 +29,10 @@ public class Car {
         this.person = person;
     }
 
+    @OneToOne (mappedBy = "car")
+    @JoinColumn(name = "car_id")
+    private Parking parking;
+
     @ManyToOne
     @JoinColumn(name = "person_id")
     private Person person;

@@ -1,17 +1,12 @@
 package com.example.demo_console;
 
-import com.example.demo_console.entity.CarBrand;
-import com.example.demo_console.entity.Car;
-import com.example.demo_console.entity.CarModel;
-import com.example.demo_console.entity.Person;
-import com.example.demo_console.repository.CarBrandRepository;
-import com.example.demo_console.repository.CarModelRepository;
-import com.example.demo_console.repository.CarRepository;
-import com.example.demo_console.repository.PersonRepository;
+import com.example.demo_console.entity.*;
+import com.example.demo_console.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,11 +16,13 @@ public class DemoConsoleApplication implements CommandLineRunner {
     public DemoConsoleApplication(CarBrandRepository carBrandRepository,
                                   CarModelRepository carModelRepository,
                                   CarRepository carRepository,
-                                  PersonRepository personRepository) {
+                                  PersonRepository personRepository,
+                                  ParkingRepository parkingRepository) {
         this.carBrandRepository = carBrandRepository;
         this.carModelRepository = carModelRepository;
         this.carRepository = carRepository;
         this.personRepository = personRepository;
+        this.parkingRepository = parkingRepository;
 
     }
 
@@ -37,6 +34,7 @@ public class DemoConsoleApplication implements CommandLineRunner {
     final CarModelRepository carModelRepository;
     final CarRepository carRepository;
     final PersonRepository personRepository;
+    final ParkingRepository parkingRepository;
 
     @Override
     public void run(String... args) {
@@ -46,11 +44,13 @@ public class DemoConsoleApplication implements CommandLineRunner {
         List<Person> persons = initPerson();
         List<CarModel> models = initModels(brands);
         List<Car> cars = initCars(models, persons);
+        List<Parking> parkings = initParking(cars);
 
         carBrandRepository.saveAll(brands);
         carModelRepository.saveAll(models);
         personRepository.saveAll(persons);
         carRepository.saveAll(cars);
+        parkingRepository.saveAll(parkings);
 
         System.out.println("<<<<<<Поиск по марке авто>>>>>>");
         System.out.println(carRepository.findAllByCarModel_CarBrandBrandName("BMW"));
@@ -90,5 +90,18 @@ public class DemoConsoleApplication implements CommandLineRunner {
         Car car2 = new Car("а333мр", carModels.get(2), persons.get(2));
         Car car3 = new Car("а444мр", carModels.get(3), persons.get(3));
         return Arrays.asList(car, car1, car2, car3);
+    }
+
+    private List<Parking> initParking(List<Car> cars) {
+        int year = 2021;
+        int month = 4;
+        int day = 8;
+        int hour = 12;
+        int minute = 10;
+        Parking parking1 = new Parking(cars.get(0), LocalDateTime.of(year, month, day, hour, minute), LocalDateTime.of(year, month, day, hour + 1, minute));
+        Parking parking2 = new Parking(cars.get(1), LocalDateTime.of(year, month, day, hour + 2, minute), LocalDateTime.of(year, month, day, hour + 5, minute));
+        Parking parking3 = new Parking(cars.get(2), LocalDateTime.of(year, month, day + 1, hour, minute), LocalDateTime.of(year, month, day + 3, hour + 1, minute));
+        Parking parkin4 = new Parking(cars.get(0), LocalDateTime.of(year, month, day + 4, hour, minute), LocalDateTime.of(year, month, day + 6, hour - 2, minute));
+        return Arrays.asList(parking1, parking2, parking3, parkin4);
     }
 }

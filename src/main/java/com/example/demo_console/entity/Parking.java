@@ -1,6 +1,7 @@
 package com.example.demo_console.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@NoArgsConstructor
 @Entity
 @Getter
 @Setter
@@ -18,7 +20,8 @@ public class Parking {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
+    @OneToOne
+    @JoinColumn(name = "car_id")
     private Car car;
 
     @Column(name = "start")
@@ -54,4 +57,12 @@ public class Parking {
         return resultPrice;
     }
 
+    @Override
+    public String toString() {
+        return "Parking{" +
+                "startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", price=" + price +
+                '}';
+    }
 }
