@@ -47,9 +47,11 @@ public class Parking {
 
 
     public Parking(Car car, LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
+        if (endDate != null && endDate.isBefore(startDate)) throw new IllegalArgumentException("End date shouldn't before start date");
         this.car = car;
         this.startDate = startDate;
         this.endDate = endDate;
+        if (startDate.equals(endDate) && endTime.isBefore(startTime)) throw new IllegalArgumentException("End time shouldn't before start time");
         this.startTime = startTime;
         this.endTime = endTime;
         this.price = calculatePriceOfDays(startDate, endDate);
@@ -71,6 +73,12 @@ public class Parking {
         int resultHour = endTime.getHour() - startTime.getHour();
         resultHour = resultHour == 0 ? 1 : resultHour;
         return BigDecimal.valueOf(resultHour).multiply(PRICE_OF_HOUR);
+    }
+
+    public void updatePrice() {
+        if (this.endDate != null) {
+            setPrice(calculatePriceOfDays(startDate, endDate));
+        }
     }
 
     @Override

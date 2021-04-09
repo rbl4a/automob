@@ -67,11 +67,15 @@ public class ParkingController {
      * @param endDate дата окончания парковки
      * @param endTime время окончания парковки
      */
-    @PostMapping("/update-end-date-time")
-    public void updateEndDateTime(@RequestParam("endDate") LocalDate endDate, @RequestParam("endTime") LocalTime endTime) {
-        Parking parking = parkingService.getById(16L);
+    @PostMapping("/update-end-date-time/{idParking}")
+    public RedirectView updateEndDateTime(@PathVariable("idParking") Long id,
+                                          @RequestParam("endDate") LocalDate endDate,
+                                          @RequestParam("endTime") LocalTime endTime) {
+        Parking parking = parkingService.getById(id);
         parking.setEndDate(endDate);
         parking.setEndTime(endTime);
+        parking.updatePrice();
         parkingService.saveParking(parking);
+        return new RedirectView("/parking/all");
     }
 }
