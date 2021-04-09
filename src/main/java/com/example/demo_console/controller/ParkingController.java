@@ -61,6 +61,12 @@ public class ParkingController {
         return new RedirectView("/parking/all");
     }
 
+    /**
+     * Вид пост запроса
+     * localhost:8080/parking/update-end-date-time?endDate=2021-04-12&endTime=14:25:00
+     * @param endDate дата окончания парковки
+     * @param endTime время окончания парковки
+     */
     @PostMapping("/update-end-date-time")
     public void updateEndDateTime(@RequestParam("endDate") LocalDate endDate, @RequestParam("endTime") LocalTime endTime) {
         Parking parking = parkingService.getById(16L);
