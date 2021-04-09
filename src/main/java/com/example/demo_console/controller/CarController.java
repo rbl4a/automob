@@ -25,7 +25,9 @@ public class CarController {
     @GetMapping(path = "")
     public String helloPage() {
         return "Параметры:" +
-                "\n\t /all - все автомобили";
+                "\n\t /all - все автомобили" +
+                "\n\t/add-car?number&modelName&brandName&firstName&lastName&phonePerson - добавление нового авто в БД" +
+                "\n\t/delete-car/{id} - удаление авто по id";
     }
 
     @GetMapping(path = "/all")

@@ -34,7 +34,8 @@ public class ParkingController {
                 "\n\t/all-by-government-number/{number} - поиск по номеру авто" +
                 "\n\t/all-by-car-model/{modelName} - поиск по модели авто" +
                 "\n\t/delete-parking/{id} - удаление записи о парковке по id" +
-                "\n\t/update-end-date-time/{idParking}?endDate&endTime - обновление полей даты и времени парковки";
+                "\n\t/update-end-date-time/{idParking}?endDate&endTime - обновление полей даты и времени парковки" +
+                "\n\t/add-parking?startDate&startTime&carId - добавление авто на парковку";
     }
 
     @GetMapping(path = "/all")

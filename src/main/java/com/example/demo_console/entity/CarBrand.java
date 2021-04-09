@@ -21,7 +21,7 @@ public class CarBrand {
     @Id
     @GeneratedValue
     @Column(name = "brand_id")
-    private int id;
+    private Long id;
 
     @Column(name = "brand_name", unique = true)
     private String brandName;
