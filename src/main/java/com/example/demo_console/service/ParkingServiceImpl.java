@@ -31,7 +31,7 @@ public class ParkingServiceImpl implements ParkingService {
 
     @Override
     public List<Parking> findAllByCarModel(String modelName) {
-        return null;
+        return parkingRepository.findAllByCar_CarModel_ModelName(modelName);
     }
 
     @Override
