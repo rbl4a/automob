@@ -25,6 +25,8 @@ public interface ParkingService {
     List<Parking> finaAllParkingEndTime(LocalTime endTime);
 
     void deleteParkingById(Long id);
+    Parking getById(Long id);
+    void saveParking(Parking parking);
 
 
 

@@ -54,6 +54,9 @@ public class Parking {
     }
 
     private BigDecimal calculatePriceOfDays(LocalDate startDate, LocalDate endDate) {
+        if (endDate == null) {
+            return BigDecimal.valueOf(0);
+        }
         if (endDate.equals(startDate)) {
             return calculatePriceOfHours(this.startTime, this.endTime);
         } else {
@@ -89,7 +92,7 @@ public class Parking {
 
 
         Parking parking1 = new Parking(cars.get(0), localDate1, localDate1, localTime1, localTime2);
-        Parking parking2 = new Parking(cars.get(1),localDate1, localDate2, localTime1, localTime3);
+        Parking parking2 = new Parking(cars.get(1),localDate1, null, localTime1, null);
         Parking parking3 = new Parking(cars.get(2),localDate1, localDate1, localTime2, localTime3);
         Parking parkin4 = new Parking(cars.get(3), localDate2, localDate2, localTime3, localTime4);
         Parking parkin5 = new Parking(cars.get(1), localDate2, localDate2, localTime3, localTime4);

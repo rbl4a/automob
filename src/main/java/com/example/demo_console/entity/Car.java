@@ -19,6 +19,7 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "government_num", unique = true)
     private String govNumber;
 
     @ManyToOne
@@ -40,7 +41,7 @@ public class Car {
 
     @Override
     public String toString() {
-        return "\nCar{" +
+        return "\nCar{id=" + id +
                 carModel +
                 person +
                 "govNumber='" + govNumber + '\'' +

@@ -21,7 +21,7 @@ public class CarBrand {
     @Column(name = "brand_id")
     private int id;
 
-    @Column(name = "brand_name")
+    @Column(name = "brand_name", unique = true)
     private String brandName;
 
     @OneToMany(mappedBy = "carBrand", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

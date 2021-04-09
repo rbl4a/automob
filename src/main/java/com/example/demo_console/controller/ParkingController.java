@@ -2,14 +2,18 @@ package com.example.demo_console.controller;
 
 import com.example.demo_console.entity.Parking;
 import com.example.demo_console.service.ParkingService;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @RestController
+@JsonView
 @RequestMapping("/parking")
 public class ParkingController {
     private final ParkingService parkingService;
@@ -55,5 +59,13 @@ public class ParkingController {
     public RedirectView deleteParkingById(@PathVariable Long id) {
         parkingService.deleteParkingById(id);
         return new RedirectView("/parking/all");
+    }
+
+    @PatchMapping(path = "/update-end-date-time")
+    public void updateEndDateTime(@RequestBody LocalDate endDate, LocalTime endTime) {
+        Parking parking = parkingService.getById(16L);
+        parking.setEndDate(endDate);
+        parking.setEndTime(endTime);
+        parkingService.saveParking(parking);
     }
 }

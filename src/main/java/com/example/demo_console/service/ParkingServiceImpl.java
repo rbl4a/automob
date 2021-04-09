@@ -79,4 +79,14 @@ public class ParkingServiceImpl implements ParkingService {
         parkingRepository.deleteById(id);
     }
 
+    @Override
+    public Parking getById(Long id) {
+        return parkingRepository.getOne(id);
+    }
+
+    @Override
+    public void saveParking(Parking parking) {
+        parkingRepository.save(parking);
+    }
+
 }
