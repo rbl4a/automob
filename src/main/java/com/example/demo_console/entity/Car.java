@@ -1,5 +1,6 @@
 package com.example.demo_console.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Setter
 @Getter
@@ -22,7 +24,7 @@ public class Car {
     @Column(name = "government_num", unique = true)
     private String govNumber;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "model_id")
     private CarModel carModel;
 
@@ -32,10 +34,10 @@ public class Car {
         this.person = person;
     }
 
-    @OneToMany (mappedBy = "car", fetch = FetchType.EAGER)
+    @OneToMany (mappedBy = "car", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Parking> parking;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id")
     private Person person;
 

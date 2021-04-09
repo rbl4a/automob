@@ -89,4 +89,9 @@ public class ParkingServiceImpl implements ParkingService {
         parkingRepository.save(parking);
     }
 
+    @Override
+    public List<Parking> findAllParkingCarId(Long id) {
+        return parkingRepository.findAllByCarId(id);
+    }
+
 }

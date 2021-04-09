@@ -27,6 +27,7 @@ public interface ParkingService {
     void deleteParkingById(Long id);
     Parking getById(Long id);
     void saveParking(Parking parking);
+    List<Parking> findAllParkingCarId(Long id);
 
 
 

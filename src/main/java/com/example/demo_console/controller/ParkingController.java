@@ -1,8 +1,11 @@
 package com.example.demo_console.controller;
 
+import com.example.demo_console.entity.Car;
 import com.example.demo_console.entity.Parking;
+import com.example.demo_console.service.CarService;
 import com.example.demo_console.service.ParkingService;
 import com.fasterxml.jackson.annotation.JsonView;
+import javassist.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +20,11 @@ import java.util.List;
 @RequestMapping("/parking")
 public class ParkingController {
     private final ParkingService parkingService;
+    private final CarService carService;
 
-    public ParkingController(ParkingService parkingService) {
+    public ParkingController(ParkingService parkingService, CarService carService) {
         this.parkingService = parkingService;
+        this.carService = carService;
     }
 
     @GetMapping
@@ -28,7 +33,8 @@ public class ParkingController {
                 "\n\t/all - вся информация по работе парковки" +
                 "\n\t/all-by-government-number/{number} - поиск по номеру авто" +
                 "\n\t/all-by-car-model/{modelName} - поиск по модели авто" +
-                "\n\t/delete-parking/{id} - удаление записи о парковке по id";
+                "\n\t/delete-parking/{id} - удаление записи о парковке по id" +
+                "\n\t/update-end-date-time/{idParking}?endDate&endTime - обновление полей даты и времени парковки";
     }
 
     @GetMapping(path = "/all")
@@ -62,7 +68,7 @@ public class ParkingController {
     }
 
     /**
-     * Вид пост запроса
+     * Вид post запроса
      * localhost:8080/parking/update-end-date-time?endDate=2021-04-12&endTime=14:25:00
      * @param endDate дата окончания парковки
      * @param endTime время окончания парковки
@@ -77,5 +83,15 @@ public class ParkingController {
         parking.updatePrice();
         parkingService.saveParking(parking);
         return new RedirectView("/parking/all");
+    }
+
+    @PostMapping("/add-parking")
+    public void addParking(@RequestParam("startDate") LocalDate startDate,
+                           @RequestParam("startTime") LocalTime startTime,
+                           @RequestParam("carId") Long id) throws NotFoundException {
+        Car car = carService.findCarById(id);
+        if (car == null) throw new NotFoundException(String.format("Car with id=%d not found", id));
+        Parking parking = new Parking(car, startDate, null, startTime, null);
+        parkingService.saveParking(parking);
     }
 }

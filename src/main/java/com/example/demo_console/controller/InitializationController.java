@@ -48,7 +48,7 @@ public class InitializationController {
         carBrandService.saveAllCarBrand(carBrands);
         personService.saveAllPersons(persons);
         carModelService.saveAllCarModel(carModels);
-        carService.saveAll(cars);
+        carService.saveAllCars(cars);
         parkingService.saveAllParking(parking);
 
         return new RedirectView("/");
