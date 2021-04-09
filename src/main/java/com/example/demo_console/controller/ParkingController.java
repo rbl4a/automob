@@ -4,10 +4,7 @@ import com.example.demo_console.entity.Parking;
 import com.example.demo_console.service.ParkingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -50,6 +47,12 @@ public class ParkingController {
             return new ResponseEntity<>("Car not found", HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(allParking.toString());
+    }
+
+    @DeleteMapping(path = "/delete-parking/{id}")
+    public ResponseEntity deleteParkingById(@PathVariable Long id) {
+        parkingService.deleteParkingById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 

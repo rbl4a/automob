@@ -74,4 +74,9 @@ public class ParkingServiceImpl implements ParkingService {
         return null;
     }
 
+    @Override
+    public void deleteParkingById(Long id) {
+        parkingRepository.deleteById(id);
+    }
+
 }
