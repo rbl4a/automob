@@ -24,7 +24,8 @@ public class ParkingController {
     @GetMapping
     public String helloPage() {
         return "Возможные параметры: " +
-                "\n /all - все даты парковки и цены";
+                "\n\t/all - вся информация по работе парковки" +
+                "\n\t/all-by-government-number/{number} - поиск по номеру авто";
     }
 
     @GetMapping(path = "/all")
