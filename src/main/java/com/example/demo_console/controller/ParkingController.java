@@ -61,8 +61,8 @@ public class ParkingController {
         return new RedirectView("/parking/all");
     }
 
-    @PatchMapping(path = "/update-end-date-time")
-    public void updateEndDateTime(@RequestBody LocalDate endDate, LocalTime endTime) {
+    @PostMapping("/update-end-date-time")
+    public void updateEndDateTime(@RequestParam("endDate") LocalDate endDate, @RequestParam("endTime") LocalTime endTime) {
         Parking parking = parkingService.getById(16L);
         parking.setEndDate(endDate);
         parking.setEndTime(endTime);

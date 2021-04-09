@@ -1,5 +1,6 @@
 package com.example.demo_console.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@JsonView
 @Table(name = "parking")
 public class Parking {
 
