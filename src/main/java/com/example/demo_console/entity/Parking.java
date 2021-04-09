@@ -87,6 +87,8 @@ public class Parking {
     public String toString() {
         return "\nParking{" + id +
                 car +
+                "startDate=" + startDate +
+                ", endDate=" + endDate +
                 "startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", price=" + price +
