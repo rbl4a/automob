@@ -5,6 +5,7 @@ import com.example.demo_console.service.ParkingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -22,7 +23,8 @@ public class ParkingController {
         return "Возможные параметры: " +
                 "\n\t/all - вся информация по работе парковки" +
                 "\n\t/all-by-government-number/{number} - поиск по номеру авто" +
-                "\n\t/all-by-car-model/{modelName} - поиск по модели авто";
+                "\n\t/all-by-car-model/{modelName} - поиск по модели авто" +
+                "\n\t/delete-parking/{id} - удаление записи о парковке по id";
     }
 
     @GetMapping(path = "/all")
@@ -50,11 +52,8 @@ public class ParkingController {
     }
 
     @DeleteMapping(path = "/delete-parking/{id}")
-    public ResponseEntity deleteParkingById(@PathVariable Long id) {
+    public RedirectView deleteParkingById(@PathVariable Long id) {
         parkingService.deleteParkingById(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new RedirectView("/parking/all");
     }
-
-
-
 }
