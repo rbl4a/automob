@@ -34,7 +34,7 @@ public class CarBrand {
 
     @Override
     public String toString() {
-        return "CarBrand{" +
+        return "\nCarBrand{" +
                 "brandName='" + brandName + '\'' +
                 '}';
     }

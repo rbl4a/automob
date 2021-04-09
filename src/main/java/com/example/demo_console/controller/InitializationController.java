@@ -51,6 +51,6 @@ public class InitializationController {
         carService.saveAll(cars);
         parkingService.saveAllParking(parking);
 
-        return new RedirectView("/parking");
+        return new RedirectView("/");
     }
 }

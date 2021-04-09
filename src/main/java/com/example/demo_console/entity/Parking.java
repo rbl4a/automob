@@ -71,6 +71,7 @@ public class Parking {
     @Override
     public String toString() {
         return "\nParking{" +
+                car +
                 "startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", price=" + price +
