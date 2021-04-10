@@ -10,10 +10,10 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.util.List;
 
 /**
- * Для инициализации таблиц базы данных.
+ * Контроллер для инициализации таблиц базы данных.
  * Используется один раз совместно с параметом spring.jpa.hibernate.ddl-auto=none
  * в файле application.properties.
- * После инициализации изменить параметр на none.
+ * После инициализации изменить параметр на none (не для H2).
  */
 @RestController
 @RequestMapping("/init")
@@ -37,6 +37,10 @@ public class InitializationController {
         this.parkingService = parkingService;
     }
 
+    /**
+     * Инициализация таблиц БД
+     * @return redirect в корень
+     */
     @GetMapping
     public RedirectView initializationDB() {
         List<CarBrand> carBrands = CarBrand.initBrands();

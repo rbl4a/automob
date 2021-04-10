@@ -1,3 +1,8 @@
+InitializationController
+GET localhost:8080/init - запускать только один раз
+===========================================
+Main Controller
+GET localhost:8080
 ===========================================
 CarController
 GET localhost:8080/car
