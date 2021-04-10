@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -17,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Getter
-@Setter
 @JsonView
 @Table(name = "parking")
 public class Parking {
@@ -112,5 +110,35 @@ public class Parking {
         Parking parkin5 = new Parking(cars.get(1), localDate2, localDate2, localTime3, localTime4);
 
         return Arrays.asList(parking1, parking2, parking3, parkin4, parkin5);
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        if (endDate != null && endDate.isBefore(startDate)) throw new IllegalArgumentException("End date shouldn't before start date");
+        this.endDate = endDate;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        if (startDate.equals(endDate) && endTime.isBefore(startTime)) throw new IllegalArgumentException("End time shouldn't before start time");
+        this.endTime = endTime;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

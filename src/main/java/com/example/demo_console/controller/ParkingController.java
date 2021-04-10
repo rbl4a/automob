@@ -14,6 +14,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @JsonView
@@ -90,9 +91,9 @@ public class ParkingController {
     public void addParking(@RequestParam("startDate") LocalDate startDate,
                            @RequestParam("startTime") LocalTime startTime,
                            @RequestParam("carId") Long id) throws NotFoundException {
-        Car car = carService.findCarById(id);
-        if (car == null) throw new NotFoundException(String.format("Car with id=%d not found", id));
-        Parking parking = new Parking(car, startDate, null, startTime, null);
+        Optional<Car> optionalCar = Optional.ofNullable(carService.findCarById(id));
+        Parking parking = new Parking(optionalCar
+                .orElseThrow(() -> new NotFoundException(String.format("Car with id=%d not found", id))), startDate, null, startTime, null);
         parkingService.saveParking(parking);
     }
 }
