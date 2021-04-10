@@ -12,6 +12,9 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
+/**
+ * Контроллер управления записями авто в БД
+ */
 @RestController
 @RequestMapping(path = "/car")
 public class CarController {
@@ -22,6 +25,10 @@ public class CarController {
         this.carService = carService;
     }
 
+    /**
+     * Начальная страница каталога car
+     * @return спискок подкаталогов
+     */
     @GetMapping(path = "")
     public String helloPage() {
         return "Параметры:" +
@@ -30,12 +37,26 @@ public class CarController {
                 "\n\t/delete-car/{id} - удаление авто по id";
     }
 
+    /**
+     * Список всех автомобилей с данными о вледельце
+     * @return список всех авто
+     */
     @GetMapping(path = "/all")
     public ResponseEntity<String> findAllCar() {
         List<Car> allCar = carService.findAllCar();
         return new ResponseEntity<>(allCar.toString(), HttpStatus.OK);
     }
 
+    /**
+     * Добавление нового авто в БД
+     * @param carNumber номер авто
+     * @param modelName модель
+     * @param brandName марка
+     * @param firstName имя владельца
+     * @param lastName фамилия владельца
+     * @param personPhone номер телефона владельца
+     * @return redirect на {@link CarController#findAllCar()}
+     */
     @PutMapping(path = "/add-car")
     public RedirectView addCar(@RequestParam("number") String carNumber,
                                @RequestParam("modelName") String modelName,
@@ -73,6 +94,10 @@ public class CarController {
         return new RedirectView("/car/all");
     }
 
+    /**
+     * Удаление авто по id
+     * @param id авто
+     */
     @DeleteMapping(path = "/delete-car/{id}")
     public void deleteCarById(@PathVariable("id") Long id) {
         carService.deleteCarById(id);

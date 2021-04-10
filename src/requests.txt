@@ -1,10 +1,10 @@
+===========================================
 CarController
-
-
-
-
-
-
+GET localhost:8080/car
+GET localhost:8080/car/all
+PUT localhost:8080/car/add-car?number&modelName&brandName&firstName&lastName&phonePerson
+DELETE localhost:8080/car/delete-car/{id}
+===========================================
 ParkingController
 GET localhost:8080/parking
 GET localhost:8080/parking/all
