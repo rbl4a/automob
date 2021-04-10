@@ -1,0 +1,2 @@
+
+POST localhost:8080/parking/update-end-date-time?endDate=2021-04-12&endTime=14:25:00

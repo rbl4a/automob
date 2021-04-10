@@ -16,6 +16,9 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Контроллер управления парковкой
+ */
 @RestController
 @JsonView
 @RequestMapping("/parking")
@@ -28,6 +31,10 @@ public class ParkingController {
         this.carService = carService;
     }
 
+    /**
+     * Начальная страница каталога parking
+     * @return спискок подкаталогов
+     */
     @GetMapping
     public String helloPage() {
         return "Возможные параметры: " +
@@ -39,12 +46,21 @@ public class ParkingController {
                 "\n\t/add-parking?startDate&startTime&carId - добавление авто на парковку";
     }
 
+    /**
+     * Список всех записей о парковках автомобилей в БД
+     * @return HTTP 200 OK со списком всех записей о парковках в БД
+     */
     @GetMapping(path = "/all")
     public ResponseEntity<String> getAllParking() {
         List<Parking> allParking = parkingService.findAllParking();
         return ResponseEntity.ok(allParking.toString());
     }
 
+    /**
+     * Поиск информации о стоянках конкретного авто по его гос номеру
+     * @param number - гос номер
+     * @return HTTP 200 OK со списком записей о стоянках конкретного авто
+     */
     @GetMapping(path = "/all-by-government-number/{number}")
     public ResponseEntity<String> getAllParkingByGovNumber(@PathVariable String number) {
         List<Parking> allParking = parkingService.findAllByCarGovNumber(number);
@@ -54,6 +70,11 @@ public class ParkingController {
         return ResponseEntity.ok(allParking.toString());
     }
 
+    /**
+     * Поиск информации об автомобиле по названию модели
+     * @param modelName - название модели
+     * @return HTTP 200 OK со списком записей о стоянках авто с заданной моделью
+     */
     @GetMapping(path = "/all-by-car-model/{modelName}")
     public ResponseEntity<String> getAllParkingByCarModelName(@PathVariable String modelName) {
         List<Parking> allParking = parkingService.findAllByCarModel(modelName);
@@ -63,6 +84,11 @@ public class ParkingController {
         return ResponseEntity.ok(allParking.toString());
     }
 
+    /**
+     * Удаление автомобиля из БД по id
+     * @param id - id автомобиля
+     * @return redirect на {@link ParkingController#getAllParking()}
+     */
     @DeleteMapping(path = "/delete-parking/{id}")
     public RedirectView deleteParkingById(@PathVariable Long id) {
         parkingService.deleteParkingById(id);
@@ -70,10 +96,11 @@ public class ParkingController {
     }
 
     /**
-     * Вид post запроса
-     * localhost:8080/parking/update-end-date-time?endDate=2021-04-12&endTime=14:25:00
+     * Добавление даты и времени окончания парковки
+     * @param id парковки
      * @param endDate дата окончания парковки
      * @param endTime время окончания парковки
+     * @return redirect на {@link ParkingController#getAllParking()}
      */
     @PostMapping("/update-end-date-time/{idParking}")
     public RedirectView updateEndDateTime(@PathVariable("idParking") Long id,
@@ -87,6 +114,13 @@ public class ParkingController {
         return new RedirectView("/parking/all");
     }
 
+    /**
+     * Постановка авто из БД на стоянку
+     * @param startDate дата начала парковки в формате yyyy-MM-dd
+     * @param startTime дата окончания парковки HH:mm:ss
+     * @param id автомобиля
+     * @throws NotFoundException если автомобиль не найден в БД
+     */
     @PostMapping("/add-parking")
     public void addParking(@RequestParam("startDate") LocalDate startDate,
                            @RequestParam("startTime") LocalTime startTime,
