@@ -1,2 +1,15 @@
+CarController
 
-POST localhost:8080/parking/update-end-date-time?endDate=2021-04-12&endTime=14:25:00
+
+
+
+
+
+ParkingController
+GET localhost:8080/parking
+GET localhost:8080/parking/all
+GET localhost:8080/parking/all-by-government-number/а222мр
+GET localhost:8080/parking/all-by-car-model/BMW
+DELETE localhost:8080/parking/delete-parking/{id}
+POST localhost:8080/parking/update-end-date-time/{idParking}?endDate&endTime
+POST localhost:8080/parking/add-parking?startDate&startTime&carId
