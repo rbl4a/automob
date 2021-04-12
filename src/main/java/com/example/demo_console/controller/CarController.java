@@ -50,47 +50,38 @@ public class CarController {
     /**
      * Добавление нового авто в БД
      * @param carNumber номер авто
-     * @param modelName модель
-     * @param brandName марка
-     * @param firstName имя владельца
-     * @param lastName фамилия владельца
-     * @param personPhone номер телефона владельца
+     * @param car автомобиль для добавления
      * @return redirect на {@link CarController#findAllCar()}
      */
-    @PutMapping(path = "/add-car")
-    public RedirectView addCar(@RequestParam("number") String carNumber,
-                               @RequestParam("modelName") String modelName,
-                               @RequestParam("brandName") String brandName,
-                               @RequestParam("firstName") String firstName,
-                               @RequestParam("lastName") String lastName,
-                               @RequestParam("phonePerson") String personPhone) {
+    @PutMapping(path = "/add-car/{carNumber}")
+    public RedirectView addCar(@PathVariable String carNumber, @RequestBody Car car) {
         Person person;
         CarBrand carBrand;
         CarModel carModel;
 
-        List<Car> carsByPhone = carService.findCarsByPhoneNumber(personPhone);
+        List<Car> carsByPhone = carService.findCarsByPhoneNumber(car.getPerson().getPhoneNumber());
         if (!carsByPhone.isEmpty()) {
             person = carsByPhone.get(0).getPerson();
         } else {
-            person = new Person(firstName, lastName, personPhone);
+            person = new Person(car.getPerson().getFirstName(), car.getPerson().getLastName(), car.getPerson().getPhoneNumber());
         }
 
-        List<Car> carsByBrand = carService.findCarsByBrand(brandName);
+        List<Car> carsByBrand = carService.findCarsByBrand(car.getCarModel().getCarBrand().getBrandName());
         if (!carsByBrand.isEmpty()) {
             carBrand = carsByBrand.get(0).getCarModel().getCarBrand();
         } else {
-            carBrand = new CarBrand(brandName);
+            carBrand = new CarBrand(car.getCarModel().getCarBrand().getBrandName());
         }
 
-        List<Car> carsByModel = carService.findCarsByModel(modelName);
+        List<Car> carsByModel = carService.findCarsByModel(car.getCarModel().getModelName());
         if (!carsByModel.isEmpty()) {
             carModel = carsByModel.get(0).getCarModel();
         } else {
-            carModel = new CarModel(modelName, carBrand);
+            carModel = new CarModel(car.getCarModel().getModelName(), carBrand);
         }
 
-        Car car = new Car(carNumber, carModel, person);
-        carService.saveCar(car);
+        Car resultCar = new Car(carNumber, carModel, person);
+        carService.saveCar(resultCar);
         return new RedirectView("/car/all");
     }
 
