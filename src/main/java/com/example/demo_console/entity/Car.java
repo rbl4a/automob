@@ -1,5 +1,7 @@
 package com.example.demo_console.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,6 +36,7 @@ public class Car {
         this.person = person;
     }
 
+    @JsonIgnore
     @OneToMany (mappedBy = "car", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Parking> parking;
 
@@ -43,11 +46,12 @@ public class Car {
 
     @Override
     public String toString() {
-        return "\nCar{id=" + id +
-                carModel +
-                person +
-                "govNumber='" + govNumber + '\'' +
-                '}';
+        try {
+            return new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(this);
+        } catch (com.fasterxml.jackson.core.JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static List<Car> initCars(List<CarModel> carModels, List<Person> persons) {

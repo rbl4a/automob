@@ -1,6 +1,7 @@
 package com.example.demo_console.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -83,14 +84,12 @@ public class Parking {
 
     @Override
     public String toString() {
-        return "\nParking{" + id +
-                car +
-                "startDate=" + startDate +
-                ", endDate=" + endDate +
-                "startTime=" + startTime +
-                ", endTime=" + endTime +
-                ", price=" + price +
-                '}';
+        try {
+            return new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(this);
+        } catch (com.fasterxml.jackson.core.JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static List<Parking> initParking(List<Car> cars) {

@@ -1,5 +1,7 @@
 package com.example.demo_console.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +32,7 @@ public class CarModel {
     @JoinColumn(name = "brand_id")
     private CarBrand carBrand;
 
+    @JsonIgnore
     @OneToMany (mappedBy = "carModel", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Collection<Car> carNumber;
 
@@ -40,10 +43,12 @@ public class CarModel {
 
     @Override
     public String toString() {
-        return "\nCarModel{" +
-                carBrand +
-                "modelName='" + modelName + '\'' +
-                '}';
+        try {
+            return new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(this);
+        } catch (com.fasterxml.jackson.core.JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static List<CarModel> initModels(List<CarBrand> brands) {
@@ -52,5 +57,10 @@ public class CarModel {
         CarModel skyline = new CarModel("Skyline", brands.get(1));
         CarModel patrol = new CarModel("Patrol", brands.get(1));
         return Arrays.asList(x5, x1, skyline, patrol);
+    }
+
+    public static void main(String[] args) {
+        CarModel carModel = new CarModel("X5", new CarBrand("BMW"));
+        System.out.println(carModel);
     }
 }
