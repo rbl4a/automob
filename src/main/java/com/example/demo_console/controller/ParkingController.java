@@ -130,4 +130,10 @@ public class ParkingController {
                 .orElseThrow(() -> new NotFoundException(String.format("Car with id=%d not found", id))), startDate, null, startTime, null);
         parkingService.saveParking(parking);
     }
+
+    @GetMapping("/all-by-phone/{phoneNumber}")
+    public ResponseEntity<List<Parking>> findAllByPhone(@PathVariable String phoneNumber) {
+        List<Parking> allByPersonPhoneNumber = parkingService.findAllByPersonPhoneNumber(phoneNumber);
+        return ResponseEntity.ok(allByPersonPhoneNumber);
+    }
 }
