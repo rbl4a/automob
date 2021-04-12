@@ -16,8 +16,8 @@ class CarBrandRepositoryTest {
 
     @Test
     void findByBrandName() {
-        List<CarBrand> carBrand = carBrandRepository.findByBrandName("KIA");
-        assertEquals(1, carBrand.size());
+        List<CarBrand> carBrand = carBrandRepository.findByBrandName("BMW");
+        assertFalse(carBrand.isEmpty());
         assertEquals("BMW", carBrand.get(0).getBrandName());
 
     }
