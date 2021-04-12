@@ -14,15 +14,13 @@ public interface ParkingService {
     List<Parking> findAllByCarModel(String modelName);
     List<Parking> findAllByCarGovNumber(String governmentNumber);
 
-    List<Parking> findAllByPersonFirstName(String firstName);
-    List<Parking> findAllByPersonLastName(String lastName);
     List<Parking> findAllByPersonPhoneNumber(String phoneNumber);
 
-    List<Parking> findAllByParkingStartDate(LocalDate startDate);
-    List<Parking> findAllByParkingEndDate(LocalDate endDate);
+    List<Parking> findAllByParkingStartDateAfter(LocalDate startDate);
+    List<Parking> findAllByParkingEndDateBefore(LocalDate endDate);
 
-    List<Parking> finaAllParkingStartTime(LocalTime startTime);
-    List<Parking> finaAllParkingEndTime(LocalTime endTime);
+    List<Parking> finaAllParkingStartTimeAfter(LocalTime startTime);
+    List<Parking> finaAllParkingEndTimeBefore(LocalTime endTime);
 
     void deleteParkingById(Long id);
     Parking getById(Long id);

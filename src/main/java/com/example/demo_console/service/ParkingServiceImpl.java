@@ -40,38 +40,28 @@ public class ParkingServiceImpl implements ParkingService {
     }
 
     @Override
-    public List<Parking> findAllByPersonFirstName(String firstName) {
-        return null;
-    }
-
-    @Override
-    public List<Parking> findAllByPersonLastName(String lastName) {
-        return null;
-    }
-
-    @Override
     public List<Parking> findAllByPersonPhoneNumber(String phoneNumber) {
-        return null;
+        return parkingRepository.findAllByCar_PersonPhoneNumber(phoneNumber);
     }
 
     @Override
-    public List<Parking> findAllByParkingStartDate(LocalDate startDate) {
-        return null;
+    public List<Parking> findAllByParkingStartDateAfter(LocalDate startDate) {
+        return parkingRepository.findAllByStartDateAfter(startDate);
     }
 
     @Override
-    public List<Parking> findAllByParkingEndDate(LocalDate endDate) {
-        return null;
+    public List<Parking> findAllByParkingEndDateBefore(LocalDate endDate) {
+        return parkingRepository.findAllByEndDateBefore(endDate);
     }
 
     @Override
-    public List<Parking> finaAllParkingStartTime(LocalTime startTime) {
-        return null;
+    public List<Parking> finaAllParkingStartTimeAfter(LocalTime startTime) {
+        return parkingRepository.findAllByStartTimeAfter(startTime);
     }
 
     @Override
-    public List<Parking> finaAllParkingEndTime(LocalTime endTime) {
-        return null;
+    public List<Parking> finaAllParkingEndTimeBefore(LocalTime endTime) {
+        return parkingRepository.findAllByEndTimeBefore(endTime);
     }
 
     @Override

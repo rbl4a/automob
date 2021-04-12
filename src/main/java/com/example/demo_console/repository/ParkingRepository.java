@@ -15,8 +15,6 @@ public interface ParkingRepository extends JpaRepository<Parking, Long> {
     List<Parking> findAllByCar_CarModel_ModelName(String modelName);
     List<Parking> findAllByCar_GovNumber(String governmentNumber);
 
-    List<Parking> findAllByCar_Person_FirstName(String firstName);
-    List<Parking> findAllByCar_Person_LastName(String lastName);
     List<Parking> findAllByCar_PersonPhoneNumber(String phoneNumber);
 
     List<Parking> findAllByStartDateAfter(LocalDate startDateAfter);
