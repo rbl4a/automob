@@ -15,9 +15,14 @@ class CarBrandRepositoryTest {
     CarBrandRepository carBrandRepository;
 
     @Test
-    void findByBrandName() {
+    void findByNameSizeListTest() {
         List<CarBrand> carBrand = carBrandRepository.findByBrandName("BMW");
-        assertFalse(carBrand.isEmpty());
+        assertEquals(1, carBrand.size());
+    }
+
+    @Test
+    void findByBrandNameTest() {
+        List<CarBrand> carBrand = carBrandRepository.findByBrandName("BMW");
         assertEquals("BMW", carBrand.get(0).getBrandName());
 
     }

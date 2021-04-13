@@ -131,6 +131,11 @@ public class ParkingController {
         parkingService.saveParking(parking);
     }
 
+    /**
+     * Поиск данных о парковке автомобилей по номеру телефона владельца
+     * @param phoneNumber
+     * @return
+     */
     @GetMapping("/all-by-phone/{phoneNumber}")
     public ResponseEntity<List<Parking>> findAllByPhone(@PathVariable String phoneNumber) {
         List<Parking> allByPersonPhoneNumber = parkingService.findAllByPersonPhoneNumber(phoneNumber);
